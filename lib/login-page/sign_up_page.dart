@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
     final LButton = Material(
       elevation: 6.0,
       borderRadius: BorderRadius.circular(10.0),
-      color: Colors.purple,
+      color: Colors.deepPurple,
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -61,13 +61,13 @@ class _SignUpPageState extends State<SignUpPage> {
         signup();
 
         },
-        child: Text("SIGN UP",
+        child: Text("CREATE ACCOUNT",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 21.0, color: Colors.white)),
       ),
     );
 
-    final SignUp = GestureDetector(
+    final SignIn = GestureDetector(
       child: Align(
         alignment: Alignment.center,
         child: Container(
@@ -78,17 +78,19 @@ class _SignUpPageState extends State<SignUpPage> {
           textAlign: TextAlign.center,
         )),
       ),
-      onTap: () {
+      onTap: () {Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()));
       },
     );
 
     final PassWordText = titleGen("Password", 12.0, FontWeight.bold, Colors.grey);
 
-    final SignIn = Align(
+    final SignUp = Align(
       alignment: Alignment.center,
       child: Container(
         child: Text(
-          "Sign in to continue",
+          "Sign up to create an account",
           style: TextStyle(
               color: Colors.grey,
               fontFamily: "Raleway",
@@ -97,8 +99,6 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
-
-    final UNameText = titleGen("Username", 12.0, FontWeight.bold, Colors.grey);
 
     final EmailText = Align(
       alignment: Alignment.centerLeft,
@@ -120,10 +120,13 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Text(
           "Welcome to Courser",
           style: TextStyle(
-              color: Colors.purple, fontFamily: "Roboto", fontSize: 22.0),
+              color: Colors.deepPurple, fontFamily: "Roboto", fontSize: 22.0),
         ),
       ),
     );
+
+    //Spacer 
+    final spacer = SizedBox(height: 10.0,);
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -143,25 +146,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: 5.0,
                 ),
-                SignIn,
+                SignUp,
                 SizedBox(
-                  height: 220.0,
+                  height: 255.0,
                 ),
                 EmailText,
+                spacer,
                 EField,
-                SizedBox(height: 10.0),
-                SizedBox(height: 10.0),
+                spacer,
                 PassWordText,
+                spacer,
                 PField,
-                SizedBox(
-                  height: 10.0,
-                ),
+                spacer,
                 LButton,
-                SizedBox(
-                  height: 10.0,
-                  
-                ),
-                SignUp,
+                spacer,
+                SignIn,
                 
               ],
             ),

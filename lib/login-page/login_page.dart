@@ -149,9 +149,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SignIn,
                 SizedBox(
-                  height: 220.0,
+                  height: 255.0,
                 ),
-                SizedBox(height: 45.0),
                 EmailText,
                 spacer,
                 EField,
@@ -161,9 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                 PField,
                 spacer,
                 LButton,
-                SizedBox(
-                  height: 10.0,
-                ),
+                spacer,
                 SignUp,
               ],
             ),
