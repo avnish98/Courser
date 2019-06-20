@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'sign_up_page.dart';
 import 'package:courser/home/home_page.dart';
 import 'dart:async';
+import 'package:courser/BasicUI/basic_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -123,6 +124,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+    // Spacer
+    final spacer = SizedBox(
+                  height: 10.0,
+                );
+
     return Scaffold(
         body: SingleChildScrollView(
       child: Center(
@@ -147,13 +153,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 45.0),
                 EmailText,
+                spacer,
                 EField,
-                SizedBox(height: 15.0),
+                spacer,
                 PassWordText,
+                spacer,
                 PField,
-                SizedBox(
-                  height: 10.0,
-                ),
+                spacer,
                 LButton,
                 SizedBox(
                   height: 10.0,
