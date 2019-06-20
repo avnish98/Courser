@@ -7,7 +7,6 @@ class Course {
   int cid; // Unique id of courses
   String cname; // course name
   String uname; //user name
-  String createdDate; //date of creation of course
   String desc; //description
   String type; //type of course
   String link; //link of course
@@ -17,12 +16,11 @@ class Course {
   String preReq; //Prerequisites for course
 
   //Constructor for Course
-  Course(int cid, String cname, String uname, String createdDate, String desc,
+  Course(int cid, String cname, String uname, String desc,
       String type, String link, String platform, int upvCount, int free, String preReq) {
     this.cid = cid;
     this.cname = cname;
     this.uname = uname;
-    this.createdDate = createdDate;
     this.desc = desc;
     this.type = type;
     this.link = link;
@@ -50,7 +48,6 @@ class CourseReview {
 class User {
   int uid; //user id
   String uname;  //user name
-  String doj;  //date of joining
   List<int> addedCourses;  //courses added  by user
   List<int> upvotedCourses;  //courses upvoted by user
   List<int> reviewedCourses;  //courses reviewed by user
@@ -59,12 +56,11 @@ class User {
   String interest3;  //third interest
 
   //constructor User
-  User(int uid, String uname, String doj, List<int> addedCourses,
+  User(int uid, String uname, List<int> addedCourses,
       List<int> upvotedCourses, List<int> reviewedCourses, String interest1,
       String interest2, String interest3,) {
         this.uid = uid;
         this.uname =uname;
-        this.doj =doj;
         this.addedCourses =addedCourses;
         this.upvotedCourses =upvotedCourses;
         this.reviewedCourses =reviewedCourses;
