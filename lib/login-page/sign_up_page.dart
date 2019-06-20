@@ -21,6 +21,36 @@ class _SignUpPageState extends State<SignUpPage> {
   
   @override
   Widget build(BuildContext context) {
+
+    // Header text 1
+    final Welcome = Align(
+      alignment: Alignment.center,
+      child: Container(
+        child: Text(
+          "Welcome to Courser",
+          style: TextStyle(
+              color: Colors.deepPurple, fontFamily: "Roboto", fontSize: 22.0),
+        ),
+      ),
+    );
+
+    // Header text 2
+    final SignUp = Align(
+      alignment: Alignment.center,
+      child: Container(
+        child: Text(
+          "Sign up to create an account",
+          style: TextStyle(
+              color: Colors.grey,
+              fontFamily: "Raleway",
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400),
+        ),
+      ),
+    );
+
+    final EmailText =titleGen("Email", 12.0, FontWeight.bold, Colors.grey);
+
     final EField = TextFormField(
               controller: emailController,
                 validator: (input) {
@@ -35,6 +65,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       )
 
             );
+
+    final PassWordText = titleGen("Password", 12.0, FontWeight.bold, Colors.grey);
+
     final PField = TextFormField(
               controller: passwordController,
                 validator: (input) {
@@ -84,47 +117,6 @@ class _SignUpPageState extends State<SignUpPage> {
       },
     );
 
-    final PassWordText = titleGen("Password", 12.0, FontWeight.bold, Colors.grey);
-
-    final SignUp = Align(
-      alignment: Alignment.center,
-      child: Container(
-        child: Text(
-          "Sign up to create an account",
-          style: TextStyle(
-              color: Colors.grey,
-              fontFamily: "Raleway",
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400),
-        ),
-      ),
-    );
-
-    final EmailText = Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        child: Text(
-          "Email",
-          style: TextStyle(
-              color: Colors.grey,
-              fontFamily: "Roboto",
-              fontSize: 12.0,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-
-    final Welcome = Align(
-      alignment: Alignment.center,
-      child: Container(
-        child: Text(
-          "Welcome to Courser",
-          style: TextStyle(
-              color: Colors.deepPurple, fontFamily: "Roboto", fontSize: 22.0),
-        ),
-      ),
-    );
-
     //Spacer 
     final spacer = SizedBox(height: 10.0,);
 
@@ -169,7 +161,8 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     ));
   }
-  
+
+// Creates new account on firebase
 void signup() async{
   
     FirebaseUser user;

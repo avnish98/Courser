@@ -1,8 +1,6 @@
 import 'package:courser/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'sign_up_page.dart';
-import 'package:courser/home/home_page.dart';
-import 'dart:async';
+import 'package:courser/login-page/sign_up_page.dart';
 import 'package:courser/BasicUI/basic_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -23,6 +21,35 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
 
+    // Header text 1
+    final Welcome = Align(
+      alignment: Alignment.center,
+      child: Container(
+        child: Text(
+          "Welcome to Courser",
+          style: TextStyle(
+              color: Colors.deepPurple, fontFamily: "Roboto", fontSize: 21.0),
+        ),
+      ),
+    );
+
+    // Header text 2
+    final SignIn = Align(
+      alignment: Alignment.center,
+      child: Container(
+        child: Text(
+          "Sign in to continue",
+          style: TextStyle(
+              color: Colors.grey,
+              fontFamily: "Roboto",
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400),
+        ),
+      ),
+    );
+
+    final EmailText = titleGen("Email", 12.0, FontWeight.bold, Colors.grey);
+
     final EField = TextFormField(
               controller: emailController,
                 validator: (input) {
@@ -38,6 +65,9 @@ class _LoginPageState extends State<LoginPage> {
                       )
 
             );
+
+    final PassWordText = titleGen("Password", 12.0, FontWeight.bold, Colors.grey);
+
     final PField =  TextFormField(
               controller: passwordController,
                 validator: (input) {
@@ -89,41 +119,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-
-    final PassWordText = titleGen("Password", 12.0, FontWeight.bold, Colors.grey);
-
-
-    // Header text
-    final SignIn = Align(
-      alignment: Alignment.center,
-      child: Container(
-        child: Text(
-          "Sign in to continue",
-          style: TextStyle(
-              color: Colors.grey,
-              fontFamily: "Roboto",
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400),
-        ),
-      ),
-    );
-
-
-    final EmailText = titleGen("Email", 12.0, FontWeight.bold, Colors.grey);
-
-
-    // Header text 1
-    final Welcome = Align(
-      alignment: Alignment.center,
-      child: Container(
-        child: Text(
-          "Welcome to Courser",
-          style: TextStyle(
-              color: Colors.deepPurple, fontFamily: "Roboto", fontSize: 21.0),
-        ),
-      ),
-    );
-
     // Spacer
     final spacer = SizedBox(
                   height: 10.0,
@@ -169,6 +164,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     ));
   }
+
+  // Authenticates sign in from Firebase
   void signin() async{
     FirebaseUser user;
     try {
