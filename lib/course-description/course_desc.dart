@@ -108,7 +108,7 @@ class CourseDesc extends StatelessWidget {
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              titleGen("Description", 32.0, FontWeight.bold, Colors.black),
+              titleGen(currCourse.cname, 32.0, FontWeight.bold, Colors.black),
               spacerCourseDesc,
               titleGen("Description", 18.0, FontWeight.bold, Colors.black),
               valueGen('${currCourse.desc}'),
