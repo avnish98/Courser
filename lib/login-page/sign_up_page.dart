@@ -2,8 +2,9 @@ import 'package:courser/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:courser/login-page/login_page.dart';
 import 'package:courser/BasicUI/basic_ui.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:courser/API/structures.dart';
+
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -170,8 +171,8 @@ void signup() async{
       user = await mAuth.createUserWithEmailAndPassword(
  
           email: emailController.text, password: passwordController.text);
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> MyHomePage()));
- 
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> callHome()));
+
     }catch(e){
       print(e.toString());
     }

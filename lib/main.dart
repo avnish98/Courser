@@ -3,7 +3,7 @@ import 'package:courser/API/checks.dart';
 
 void main() => runApp(MyApp());
 
-int _userSignedIn = 0;
+int _userSignedIn = 1;
 
 class MyApp extends StatelessWidget {
   @override

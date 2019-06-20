@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import "package:courser/add-courses/add_courses.dart";
 import 'package:courser/added-courses/added_courses.dart';
 import 'package:courser/upvoted-courses/upvoted_courses.dart';
+import 'package:courser/API/structures.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new MyHomePage()));
+                      builder: (BuildContext) => callHome()));
             },
           ),
           new ListTile(
@@ -28,7 +29,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new AddCourses()));
+                      builder: (BuildContext) => AddCourses()));
             },
           ),
           new ListTile(
@@ -37,7 +38,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new AddedCourses()));
+                      builder: (BuildContext) => AddedCourses()));
             },
             
           ),
@@ -47,7 +48,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new UpvCourses()));
+                      builder: (BuildContext) => UpvCourses()));
             },
             
           )

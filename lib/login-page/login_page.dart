@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:courser/login-page/sign_up_page.dart';
 import 'package:courser/BasicUI/basic_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:courser/API/structures.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -171,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       user = await mAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> MyHomePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> callHome()));
 
     }catch(e){
       print(e.toString());

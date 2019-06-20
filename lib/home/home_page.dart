@@ -4,19 +4,42 @@ import "../drawer/drawer.dart";
 import 'package:courser/BasicUI/basic_ui.dart';
 import 'package:courser/API/structures.dart';
 
+Widget callHome(){
 Course currCourse = Course(11,"Advanced Python Programming",'Developer',
-        '12-03-2019','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        'Python','https://www.example.com','Udacity',12,0);
+    '12-03-2019','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    'Python','https://www.example.com','Udacity',12,0);
+Course currCourse2 = Course(11,"Advanced Python Programming 2",'Developer',
+    '12-03-2019','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    'Python','https://www.example.com','Udacity',12,0);
+Course currCourse3 = Course(11,"Advanced Python Programming 3",'Developer',
+    '12-03-2019','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    'Python','https://www.example.com','Udacity',12,0);
+Course currCourse4 = Course(11,"Advanced Python Programming 4 ",'Developer',
+    '12-03-2019','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    'Python','https://www.example.com','Udacity',12,0);
+List<Course> courseList = [currCourse, currCourse2, currCourse3, currCourse4];
+
+return (MyHomePage(courseList));
+}
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
 
+  List <Course> c;
+
+  MyHomePage(List<Course> courseList){
+    this.c = courseList;
+  }
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(c);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
+  List<Course> c1;
+
+  _MyHomePageState(List<Course> courseList){
+    this.c1 = courseList;
+  }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   
@@ -73,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 10.0,
               ),
               new Expanded(
-                  child: CourseCards(context, itemList) ),
+                  child: CourseCards(context, c1) ),
                   
             ]))
       ]);

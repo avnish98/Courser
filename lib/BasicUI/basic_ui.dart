@@ -127,10 +127,10 @@ Upvoted Courses Page
 
 
 */
-Widget CourseCards (BuildContext context, List<String> itemList){
+Widget CourseCards (BuildContext context, List<Course> courseList){
       return GridView.count(
           crossAxisCount: 2,
-          children: List.generate(itemList.length, (index) {
+          children: List.generate(courseList.length, (index) {
             return GestureDetector(
               onTap:(){Navigator.push(
     context,
@@ -152,7 +152,7 @@ Widget CourseCards (BuildContext context, List<String> itemList){
                   child:Padding(
                       padding: EdgeInsets.all(0.5),
                       child:Text(
-                        itemList[index],
+                        courseList[index].cname,
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 12.0, color: Colors.white),
                       ))
