@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:courser/API/checks.dart';
+import 'package:courser/User/checks.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,4 +15,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
