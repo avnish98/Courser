@@ -1,6 +1,6 @@
 import 'package:courser/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'package:courser/login-page/login_page.dart';
 import 'package:courser/BasicUI/basic_ui.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
