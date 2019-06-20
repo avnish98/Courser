@@ -14,10 +14,11 @@ class Course {
   String platform; //platform providing course(like udemy,coursera)
   int upvCount; //no. of upvotes/likes on course
   int free; //represent boolean value free=1 and paid=0
+  String preReq; //Prerequisites for course
 
   //Constructor for Course
   Course(int cid, String cname, String uname, String createdDate, String desc,
-      String type, String link, String platform, int upvCount, int free) {
+      String type, String link, String platform, int upvCount, int free, String preReq) {
     this.cid = cid;
     this.cname = cname;
     this.uname = uname;
@@ -28,6 +29,7 @@ class Course {
     this.platform = platform;
     this.upvCount = upvCount;
     this.free = free;
+    this.preReq = preReq;
   }
 }
 
@@ -70,4 +72,36 @@ class User {
         this.interest2 =interest2;
         this.interest3 =interest3;
   }
+}
+
+Course findCourse(String courseName, List<Course> courseList){
+
+  Course foundCourse;
+
+  for(int i=0; i<courseList.length; i++){
+    if(courseList[i].cname == courseName){
+      foundCourse =  courseList[i];
+      break;
+    }
+
+    else{
+      continue;
+    }
+  }
+  return foundCourse;
+}
+
+String iffree(int value){
+  if (value == 0){
+    return('Paid');
+  }
+
+  else if (value==1){
+    return("Free");
+  }
+
+  else {
+    return(null);
+  }
+
 }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../BasicUI/basic_ui.dart';
 import 'package:courser/API/structures.dart';
 
-
-
 class CourseDesc extends StatelessWidget {
 
   Course currCourse;
@@ -11,10 +9,6 @@ class CourseDesc extends StatelessWidget {
   CourseDesc(Course c1){
     this.currCourse = c1;
   }
-
-  // TODO : Remove this
-  var para =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
   @override
   Widget build(BuildContext context) {
@@ -34,51 +28,8 @@ class CourseDesc extends StatelessWidget {
           onPressed: () {Navigator.pop(context);},
         ));
 
-    // Heading of Course
-    final courseHeading = titleGen(
-        currCourse.cname,
-        32.0,
-        FontWeight.bold,
-        Colors.black);
-
     // TODO: Return a picture according to type of course
     final courseImage = 0;
-
-    // Pre Requisites
-    final preReqText =
-        titleGen("Pre Requisites", 18.0, FontWeight.bold, Colors.black);
-
-    final preReqValue = valueGen("Python3, HTML, CSS, JS, Flask Framework");
-
-    // Type of Course
-    final typeText = titleGen("Type", 18.0, FontWeight.bold, Colors.black);
-
-    final typeTextValue = valueGen("Machine Learning");
-
-    final courseType = Row(
-      children: <Widget>[
-        typeText,
-        SizedBox(
-          width: 145.0,
-        ),
-        typeTextValue
-      ],
-    );
-
-    // Price of course
-    final priceText = titleGen("Price", 18.0, FontWeight.bold, Colors.black);
-
-    final priceTextValue = valueGen("Free");
-
-    final coursePrice = Row(
-      children: <Widget>[
-        priceText,
-        SizedBox(
-          width: 145.0,
-        ),
-        priceTextValue
-      ],
-    );
 
     final linkButton = Material(
       elevation: 5.0,
@@ -112,7 +63,7 @@ class CourseDesc extends StatelessWidget {
         SizedBox(
           width: 20.0,
         ),
-        titleGen("40K", 18.0, FontWeight.bold, Colors.black),
+        titleGen("${currCourse.upvCount}", 18.0, FontWeight.bold, Colors.black),
         SizedBox(
           width: 100.0,
         ),
@@ -121,15 +72,13 @@ class CourseDesc extends StatelessWidget {
     );
 
     // Reviews
-    final reviewText = titleGen("Reviews", 18.0, FontWeight.bold, Colors.black);
-
     final reviewBox = TextField(
         decoration: InputDecoration(hintText: "Add your comment here....."));
 
     final reviewSubButton = ButtonGen(context, "SUBMIT REVIEW", Colors.white, Colors.black);
 
     final reviewContainer = new SizedBox(
-        height: 100.0,
+        height: 500.0,
         child: ListView.builder(
             itemCount: 5,
             itemBuilder: (BuildContext context, index) {
@@ -159,21 +108,32 @@ class CourseDesc extends StatelessWidget {
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              courseHeading,
+              titleGen("Description", 32.0, FontWeight.bold, Colors.black),
               spacerCourseDesc,
               titleGen("Description", 18.0, FontWeight.bold, Colors.black),
-              valueGen(para),
+              valueGen('${currCourse.desc}'),
               spacerCourseDesc,
-              preReqText,
-              preReqValue,
+              titleGen("Platform", 18.0, FontWeight.bold, Colors.black),
+              valueGen(currCourse.platform),
               spacerCourseDesc,
-              courseType,
+              titleGen("Pre-Requisites", 18.0, FontWeight.bold, Colors.black),
+              valueGen(currCourse.preReq),
               spacerCourseDesc,
-              coursePrice,
+              titleGen("Type", 18.0, FontWeight.bold, Colors.black),
+              valueGen(currCourse.type),
+              spacerCourseDesc,
+              titleGen("Price", 18.0, FontWeight.bold, Colors.black),
+              valueGen(iffree(currCourse.free)),
+              spacerCourseDesc,
+              titleGen("Added by",18.0,FontWeight.bold, Colors.black),
+              valueGen(currCourse.uname),
+              spacerCourseDesc,
+              titleGen("Added on",18.0,FontWeight.bold, Colors.black),
+              valueGen(currCourse.createdDate),
               spacerCourseDesc,
               linkAndUpvote,
               spacerCourseDesc,
-              reviewText,
+              titleGen("Reviews",18.0,FontWeight.bold, Colors.black),
               reviewBox,
               spacerCourseDesc,
               reviewSubButton,
