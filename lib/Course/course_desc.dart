@@ -122,7 +122,7 @@ class CourseDesc extends StatelessWidget {
               valueGen(currCourse.type),
               spacerCourseDesc,
               titleGen("Price", 18.0, FontWeight.bold, Colors.black),
-              valueGen(iffree(currCourse.free)),
+              valueGen(currCourse.price),
               spacerCourseDesc,
               titleGen("Added by", 18.0, FontWeight.bold, Colors.black),
               valueGen(currCourse.uname),

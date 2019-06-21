@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // From Courser
 import 'package:courser/Basic UI Components/drawer.dart';
 import 'package:courser/Basic UI Components/basicUI.dart';
+import 'package:courser/DB Interface/structures.dart';
 
 class AddCourses extends StatefulWidget {
   AddCourses({Key key, this.title}) : super(key: key);
@@ -158,7 +159,8 @@ class _AddCourseState extends State<AddCourses> {
     final spacer = SizedBox(height: 10.0);
 
     // Submit button
-    final sButton = FloatingActionButton(backgroundColor:Colors.black, onPressed: (){print(cnameController.text);},);
+    final sButton = FloatingActionButton(backgroundColor:Colors.black, onPressed: (){Course(11, cnameController.text, "Developer", descController.text, this._courseTypeSelected,
+        linkController.text, platformController.text, 0, _priceTypeSelected, prereqController.text).ConsoleDisplay();},);
         //ButtonGen(context, 'SUBMIT', Colors.white, Colors.deepPurple);
 
     return Scaffold(

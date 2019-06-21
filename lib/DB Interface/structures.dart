@@ -12,12 +12,12 @@ class Course {
   String link; //link of course
   String platform; //platform providing course(like udemy,coursera)
   int upvCount; //no. of upvotes/likes on course
-  int free; //represent boolean value free=1 and paid=0
+  String price; // String "Free" or "Paid"
   String preReq; //Prerequisites for course
 
   //Constructor for Course
   Course(int cid, String cname, String uname, String desc,
-      String type, String link, String platform, int upvCount, int free, String preReq) {
+      String type, String link, String platform, int upvCount, String price, String preReq) {
     this.cid = cid;
     this.cname = cname;
     this.uname = uname;
@@ -26,8 +26,23 @@ class Course {
     this.link = link;
     this.platform = platform;
     this.upvCount = upvCount;
-    this.free = free;
+    this.price = price;
     this.preReq = preReq;
+  }
+
+  ConsoleDisplay(){
+    print("Course ID : ${this.cid}");
+    print("Course Name : ${this.cname}");
+    print("User Name : ${this.uname}");
+    print("Description : ${this.desc}");
+    print("Type : ${this.type}");
+    print("Link : ${this.link}");
+    print("Platform : ${this.platform}");
+    print("Upvotes : ${this.upvCount}");
+    print("Price : ${this.price}");
+    print("Pre Requisites : ${this.preReq}");
+
+
   }
 }
 

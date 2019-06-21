@@ -14,7 +14,7 @@ Course currCourse = Course(
     'https://www.example.com',
     'Udacity',
     12,
-    0,
+    'Free',
     "Somethign link");
 Course currCourse2 = Course(
     11,
@@ -25,7 +25,7 @@ Course currCourse2 = Course(
     'https://www.example.com',
     'Udacity',
     12,
-    0,
+    'Free',
     "HTML");
 Course currCourse3 = Course(
     11,
@@ -36,7 +36,7 @@ Course currCourse3 = Course(
     'https://www.example.com',
     'Udacity',
     12,
-    0,
+    'Free',
     "CSS");
 Course currCourse4 = Course(
     11,
@@ -47,7 +47,7 @@ Course currCourse4 = Course(
     'https://www.example.com',
     'Udacity',
     12,
-    0,
+    'Free',
     "JS");
 List<Course> courseList = [currCourse, currCourse2, currCourse3, currCourse4];
 
