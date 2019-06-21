@@ -41,8 +41,18 @@ class Course {
     print("Upvotes : ${this.upvCount}");
     print("Price : ${this.price}");
     print("Pre Requisites : ${this.preReq}");
+  }
 
-
+  Course loadData(Map fetchedData){
+    fetchedData['cid'] = this.cid;
+    fetchedData['cname'] = this.cname;
+    fetchedData['uname'] = this.uname;
+    fetchedData['desc'] = this.desc;
+    fetchedData['type'] = this.type;
+    fetchedData['link'] = this.link;
+    fetchedData['platform'] = this.platform;
+    fetchedData['upvcount'] = this.upvCount;
+    fetchedData['preReq'] = this.preReq;
   }
 }
 
