@@ -20,6 +20,14 @@ class _AddCourseState extends State<AddCourses> {
   var _priceTypes = ['Free', 'Paid'];
   var _priceTypeSelected = 'Free';
 
+  final cnameController = TextEditingController();
+  final platformController = TextEditingController();
+  final prereqController = TextEditingController();
+  final linkController = TextEditingController();
+  final typeController = TextEditingController();
+  final priceController = TextEditingController();
+  final descController = TextEditingController();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -33,25 +41,53 @@ class _AddCourseState extends State<AddCourses> {
     final cnameText =
         titleGen("Course Name", 12.0, FontWeight.bold, Colors.grey);
 
-    final cname = TFieldGen("JavaScript for Web Development");
+    final cname = TextFormField(
+        controller: cnameController,
+        validator: (input) {
+          if (input.isEmpty) {
+            return "Please enter a valid Course name";
+          }
+        },
+        decoration: InputDecoration(hintText: "JavaScript for Web Development"));
 
     //Course Platform
     final platformText =
         titleGen("Platform", 12.0, FontWeight.bold, Colors.grey);
 
-    final platform = TFieldGen("Udacity");
+    final platform = TextFormField(
+        controller: platformController,
+        validator: (input) {
+          if (input.isEmpty) {
+            return "Please enter a valid Platform name";
+          }
+        },
+        decoration: InputDecoration(hintText: "Udacity"));
 
     // Prerequisites
     final prereqText = titleGen(
         "Pre Requisites for course", 12.0, FontWeight.bold, Colors.grey);
 
-    final prereq = TFieldGen("Basic knowledge of HTML & CSS");
+    final prereq = TextFormField(
+        controller: prereqController,
+        validator: (input) {
+          if (input.isEmpty) {
+            return "Please enter a valid pre requisites ";
+          }
+        },
+        decoration: InputDecoration(hintText: "Basic knowledge of HTML & CSS"));
 
     // Link
     final linkText =
         titleGen("Link to Course", 12.0, FontWeight.bold, Colors.grey);
 
-    final link = TFieldGen("");
+    final link = TextFormField(
+        controller: linkController,
+        validator: (input) {
+          if (input.isEmpty) {
+            return "Please enter a valid Course name";
+          }
+        },
+        decoration: InputDecoration(hintText: "https://www.example.com/"));;
 
     // Type of Course
     final typeText = titleGen("Type", 12.0, FontWeight.bold, Colors.grey);
@@ -109,14 +145,21 @@ class _AddCourseState extends State<AddCourses> {
     final descText =
         titleGen("Description", 12.0, FontWeight.bold, Colors.grey);
 
-    final desc = TFieldGen("");
+    final desc = TextFormField(
+        controller: descController,
+        validator: (input) {
+          if (input.isEmpty) {
+            return "Please enter a valid description";
+          }
+        },
+        decoration: InputDecoration(hintText: "JavaScript is a client side language"));
 
     // Padding between textfields
     final spacer = SizedBox(height: 10.0);
 
     // Submit button
-    final sButton =
-        ButtonGen(context, 'SUBMIT', Colors.white, Colors.deepPurple);
+    final sButton = FloatingActionButton(backgroundColor:Colors.black, onPressed: (){print(cnameController.text);},);
+        //ButtonGen(context, 'SUBMIT', Colors.white, Colors.deepPurple);
 
     return Scaffold(
         key: _scaffoldKey,
