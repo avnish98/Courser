@@ -3,6 +3,19 @@ import 'package:flutter/material.dart';
 // From Courser
 import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
+import 'package:courser/Course/course_reviews.dart';
+
+Widget reviewGen() {
+  CourseReview cr1 = CourseReview(11, 'Manish', 'Good course');
+  CourseReview cr2 = CourseReview(
+      12, 'Nitesh', 'Could have been a better explaination');
+  CourseReview cr3 = CourseReview(
+      11, 'Lalit', 'Instructor\'s voice isn\'t clear');
+
+  List <CourseReview> crList = [cr1, cr2, cr3];
+
+  return ReviewContainer(crList);
+}
 
 class CourseDesc extends StatelessWidget {
   Course currCourse;
@@ -81,25 +94,7 @@ class CourseDesc extends StatelessWidget {
     final reviewSubButton =
         ButtonGen(context, "SUBMIT REVIEW", Colors.white, Colors.black);
 
-    final reviewContainer = new SizedBox(
-        height: 500.0,
-        child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (BuildContext context, index) {
-              return Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: Card(
-                    elevation: 5.0,
-                    child: Column(
-                      children: <Widget>[
-                        titleGen("Username", 12.0, FontWeight.bold,
-                            Colors.deepPurple),
-                        Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ")
-                      ],
-                    ),
-                  ));
-            }));
+    final reviewContainer = reviewGen();
 
     final spacerCourseDesc = SizedBox(
       height: 20.0,

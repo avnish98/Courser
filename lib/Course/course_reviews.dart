@@ -28,7 +28,7 @@ class ReviewContainer extends StatelessWidget{
                       children: <Widget>[
                         titleGen(cr[index].uname, 12.0, FontWeight.bold,
                             Colors.deepPurple),
-                        Text(cr[index].review)
+                        Align(alignment: Alignment.centerLeft,child:Text(cr[index].review))
                       ],
                     ),
                   ));
