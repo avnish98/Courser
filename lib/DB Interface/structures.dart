@@ -68,6 +68,12 @@ class CourseReview {
     this.review = review;
   }
 
+  CourseReview loadData(Map fetchedData){
+    fetchedData['cid'] = this.cid;
+    fetchedData['uname'] = this.uname;
+    fetchedData['review'] = this.review;
+  }
+
 }
 
 class User {
@@ -92,6 +98,17 @@ class User {
         this.interest1 =interest1;
         this.interest2 =interest2;
         this.interest3 =interest3;
+  }
+
+  User fetchData(Map fetchedData){
+    fetchedData['uid'] = this.uid;
+    fetchedData['uname'] = this.uname;
+    fetchedData['addedCourses'] = this.addedCourses;
+    fetchedData['upvotedCourses'] = this.upvotedCourses;
+    fetchedData['reviewCourses'] = this.reviewedCourses;
+    fetchedData['interest1'] = this.interest1;
+    fetchedData['interest2'] = this.interest2;
+    fetchedData['interest3'] = this.interest3;
   }
 }
 
