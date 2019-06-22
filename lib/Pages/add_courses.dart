@@ -14,7 +14,7 @@ class AddCourses extends StatefulWidget {
 }
 
 class _AddCourseState extends State<AddCourses> {
-  // TODO : Add all the courses here
+
   var _courseTypes = ['Web Development', 'Python', 'Java', 'Flutter'];
   var _courseTypeSelected = 'Web Development';
 
@@ -161,25 +161,6 @@ class _AddCourseState extends State<AddCourses> {
     // Padding between textfields
     final spacer = SizedBox(height: 10.0);
 
-    Map payLoad = {
-      "cid": 11,
-      "cname": cnameController.text,
-      "uname": 'Devloper',
-      "desc": descController.text,
-      "type": this._courseTypeSelected,
-      "link": linkController.text,
-      "platform": platformController.text,
-      "upvcount": 0,
-      "price": this._priceTypeSelected,
-      "preReq": prereqController.text
-    };
-
-    void createCourse(Map courseMap) {
-      Course c1;
-      c1.loadData(courseMap);
-      c1.ConsoleDisplay();
-    }
-
     // Submit button
     final sButton = Material(
       elevation: 5.0,
@@ -189,7 +170,18 @@ class _AddCourseState extends State<AddCourses> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          createCourse(payLoad);
+          Course c1 = Course(
+              11,
+              cnameController.text,
+              'Devloper',
+              descController.text,
+              this._courseTypeSelected,
+              linkController.text,
+              platformController.text,
+              0,
+              this._priceTypeSelected,
+              prereqController.text);
+          c1.flush();
         },
         child: Text("Add Course",
             textAlign: TextAlign.center,

@@ -44,15 +44,25 @@ class Course {
   }
 
   Course loadData(Map fetchedData){
-    fetchedData['cid'] = this.cid;
-    fetchedData['cname'] = this.cname;
-    fetchedData['uname'] = this.uname;
-    fetchedData['desc'] = this.desc;
-    fetchedData['type'] = this.type;
-    fetchedData['link'] = this.link;
-    fetchedData['platform'] = this.platform;
-    fetchedData['upvcount'] = this.upvCount;
-    fetchedData['preReq'] = this.preReq;
+    try {
+      fetchedData['cid'] = this.cid;
+      fetchedData['cname'] = this.cname;
+      fetchedData['uname'] = this.uname;
+      fetchedData['desc'] = this.desc;
+      fetchedData['type'] = this.type;
+      fetchedData['link'] = this.link;
+      fetchedData['platform'] = this.platform;
+      fetchedData['upvcount'] = this.upvCount;
+      fetchedData['preReq'] = this.preReq;
+    }
+    catch (e){
+      print(e);
+    }
+  }
+
+  void flush(){
+    print('Added to database');
+    //TODO: Write code for adding entry to database
   }
 }
 
