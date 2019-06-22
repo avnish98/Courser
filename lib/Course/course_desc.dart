@@ -1,3 +1,5 @@
+/* This file contains code for Course Description page */
+
 import 'package:flutter/material.dart';
 
 // From Courser
