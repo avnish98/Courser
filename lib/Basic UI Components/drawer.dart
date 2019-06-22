@@ -1,8 +1,10 @@
-import 'package:courser/home/home_page.dart';
 import 'package:flutter/material.dart';
-import "package:courser/add-courses/add_courses.dart";
-import 'package:courser/added-courses/added_courses.dart';
-import 'package:courser/upvoted-courses/upvoted_courses.dart';
+
+// From Courser
+import 'package:courser/Pages/home_page.dart';
+import "package:courser/Pages/add_courses.dart";
+import 'package:courser/Pages/added_courses.dart';
+import 'package:courser/Pages/upvoted_courses.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -10,16 +12,22 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          new Container(child: new DrawerHeader(child: Align(alignment:Alignment.bottomLeft, child:Text('Username goes here', style: TextStyle(color: Colors.white),)),
-              
-          ),color: Colors.deepPurple,),
+          new Container(
+            child: new DrawerHeader(
+              child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    'Username goes here',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
+            color: Colors.deepPurple,
+          ),
           new ListTile(
             title: new Text('Home '),
             onTap: () {
-              Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (BuildContext) => new MyHomePage()));
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (BuildContext) => callHome()));
             },
           ),
           new ListTile(
@@ -28,7 +36,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new AddCourses()));
+                      builder: (BuildContext) => AddCourses()));
             },
           ),
           new ListTile(
@@ -37,9 +45,8 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new AddedCourses()));
+                      builder: (BuildContext) => AddedCourses()));
             },
-            
           ),
           new ListTile(
             title: new Text('Upvoted courses'),
@@ -47,9 +54,8 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => new UpvCourses()));
+                      builder: (BuildContext) => UpvCourses()));
             },
-            
           )
         ],
       ),

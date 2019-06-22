@@ -1,5 +1,10 @@
+/* This file contains basic UI components created for reusability */
+
 import 'package:flutter/material.dart';
-import 'package:courser/course-description/course_desc.dart';
+
+// From Courser
+import 'package:courser/Course/course_desc.dart';
+import 'package:courser/DB Interface/structures.dart';
 
 // Generates a string title
 /* Used at 
@@ -65,17 +70,14 @@ Add Courses page
 
 
 */
-Widget ButtonGen(BuildContext context, String buttonText, var textColor,
-    var buttonColor) {
+Widget ButtonGen(
+    BuildContext context, String buttonText, var textColor, var buttonColor) {
   return Material(
     elevation: 5.0,
     borderRadius: BorderRadius.circular(10.0),
     color: buttonColor,
     child: MaterialButton(
-      minWidth: MediaQuery
-          .of(context)
-          .size
-          .width,
+      minWidth: MediaQuery.of(context).size.width,
       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       onPressed: () {},
       child: Text(buttonText,
@@ -120,37 +122,37 @@ Upvoted Courses Page
 
 
 */
-Widget CourseCards (BuildContext context, List<String> itemList){
-      return GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(itemList.length, (index) {
-            return GestureDetector(
-              onTap:(){Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => CourseDesc()),);},
-              child:Card(
-              //color: Colors.black,
-              child:Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/python.jpg"),
-            fit: BoxFit.fitWidth,
-            alignment: Alignment.topCenter,
-          ),
-        ),
-        child:
-
-              Align(
+Widget CourseCards(BuildContext context, List<Course> courseList) {
+  return GridView.count(
+      crossAxisCount: 2,
+      children: List.generate(courseList.length, (index) {
+        return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CourseDesc(courseList[index])),
+              );
+            },
+            child: Card(
+                //color: Colors.black,
+                child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/python.jpg"),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                ),
+              ),
+              child: Align(
                   alignment: Alignment.bottomCenter,
-                  child:Padding(
+                  child: Padding(
                       padding: EdgeInsets.all(0.5),
-                      child:Text(
-                        itemList[index],
+                      child: Text(
+                        courseList[index].cname,
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 12.0, color: Colors.white),
-                      ))
-              )
-              ,
-            )
-      ));})
-      );}
+                      ))),
+            )));
+      }));
+}
