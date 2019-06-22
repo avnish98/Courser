@@ -20,7 +20,7 @@ Widget reviewGen() {
 }
 
 class CourseDesc extends StatelessWidget {
-  Course currCourse;
+  Course currCourse; //current course
 
   CourseDesc(Course c1) {
     this.currCourse = c1;
