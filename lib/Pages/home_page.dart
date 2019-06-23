@@ -20,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     DatabaseReference ref=FirebaseDatabase.instance.reference();
-    ref.child('Course').once().then((DataSnapshot snap){
+    ref.child('courses').child('0').once().then((DataSnapshot snap){
       var data=snap.value;
       alldata.clear();
         Course c=new Course(
