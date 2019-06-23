@@ -20,28 +20,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     DatabaseReference ref=FirebaseDatabase.instance.reference();
-    ref.child('courses').once().then((DataSnapshot snap){
+    ref.child('Course').once().then((DataSnapshot snap){
       var data=snap.value;
       alldata.clear();
-        Course course=new Course(
+        Course c=new Course(
           data['cid'], 
-          data['cname'],
+          data['cname'], 
+          data['uname'],
           data['desc'], 
+          data['type'], 
           data['link'], 
           data['platform'], 
-          data['preReq'],
-          data['price'], 
-          data['type'], 
-          data['uname'],
           data['upvCount'], 
+          data['price'], 
+          data['preReq']
           );
-          print('${course.cname}');
-          this.alldata.add(course);
-      
-    });
-    setState(() {
+          print('${c.cname}');
+          this.alldata.add(c);
+           setState(() {
      print('length ${alldata.length}');
     });
+      
+    });
+   
   }
   @override
   Widget build(BuildContext context) {
