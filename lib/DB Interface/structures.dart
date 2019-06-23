@@ -4,20 +4,20 @@ class Course {
      purpose: to store and retrieve data related to course
      */
 
-  String cid; // Unique id of courses
+  int cid; // Unique id of courses
   String cname; // course name
   String uname; //user name
   String desc; //description
   String type; //type of course
   String link; //link of course
   String platform; //platform providing course(like udemy,coursera)
-  String upvCount; //no. of upvotes/likes on course
+  int upvCount; //no. of upvotes/likes on course
   String price; // String "Free" or "Paid"
   String preReq; //Prerequisites for course
 
   //Constructor for Course
-  Course(String cid, String cname, String uname, String desc,
-      String type, String link, String platform, String upvCount, String price, String preReq) {
+  Course(int cid, String cname, String uname, String desc,
+      String type, String link, String platform, int upvCount, String price, String preReq) {
     this.cid = cid;
     this.cname = cname;
     this.uname = uname;
