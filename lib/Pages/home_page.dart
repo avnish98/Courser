@@ -13,37 +13,74 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Course> alldata;
+  List<Course> alldata=[];
 
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   void initState() {
     DatabaseReference ref=FirebaseDatabase.instance.reference();
-    ref.child('course').once().then((DataSnapshot snap){
+    ref.child('courses').once().then((DataSnapshot snap){
       var data=snap.value;
-      for(int i=1;i<=99;i++){
+      alldata.clear();
         Course course=new Course(
-          data[i]['cid'], 
-          data[i]['cname'], 
-          data[i]['uname'],
-          data[i]['desc'], 
-          data[i]['type'], 
-          data[i]['link'], 
-          data[i]['platform'], 
-          data[i]['upvCount'], 
-          data[i]['price'], 
-          data[i]['preReq']
+          data['cid'], 
+          data['cname'],
+          data['desc'], 
+          data['link'], 
+          data['platform'], 
+          data['preReq'],
+          data['price'], 
+          data['type'], 
+          data['uname'],
+          data['upvCount'], 
           );
-          alldata.add(course);
-      }
+          print('${course.cname}');
+          this.alldata.add(course);
+      
     });
     setState(() {
      print('length ${alldata.length}');
     });
   }
-
   @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(
+      home:Scaffold(
+      appBar: AppBar(title: Text('Firebase data'),),
+      body: Container(
+        child: alldata.length==0? Text('No data is available')
+        :ListView.builder(
+          itemCount: alldata.length,
+          itemBuilder: (_,index){
+            return UI(
+              alldata[index].cname
+            );
+          },
+        ),
+      ),
+      )
+    );
+  }
+  Widget UI(String Cname){
+    return Card(
+      elevation: 10.0,
+      child: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('CName: $Cname',style: Theme.of(context).textTheme.title),
+          ],
+        ),
+      ),
+    );
+  }
+
+}
+
+  /*@override
   Widget build(BuildContext context) {
     // Home page
 
@@ -110,4 +147,4 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(15.0),
             child: TitleCourseCards("Recommendations for you" )));
   }
-}
+}*/
