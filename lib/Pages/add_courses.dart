@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:courser/Basic UI Components/drawer.dart';
 import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 class AddCourses extends StatefulWidget {
   AddCourses({Key key, this.title}) : super(key: key);
   final String title;
@@ -14,12 +14,17 @@ class AddCourses extends StatefulWidget {
 }
 
 class _AddCourseState extends State<AddCourses> {
+   bool _autovalidate = false;
+  GlobalKey<FormState> _key = new GlobalKey();  
+  
 
   var _courseTypes = ['Web Development', 'Python', 'Java', 'Flutter'];
   var _courseTypeSelected = 'Web Development';
 
   var _priceTypes = ['Free', 'Paid'];
   var _priceTypeSelected = 'Free';
+  int cid=0;
+  String scname,splatform,sprereq,slink,stype,sprice,sdesc;
 
   final cnameController = TextEditingController();
   final platformController = TextEditingController();
@@ -50,7 +55,10 @@ class _AddCourseState extends State<AddCourses> {
           }
         },
         decoration:
-            InputDecoration(hintText: "JavaScript for Web Development"));
+            InputDecoration(hintText: "JavaScript for Web Development"),
+            onSaved:(val){
+              scname=val;
+            });
 
     //Course Platform
     final platformText =
@@ -63,7 +71,10 @@ class _AddCourseState extends State<AddCourses> {
             return "Please enter a valid Platform name";
           }
         },
-        decoration: InputDecoration(hintText: "Udacity"));
+        decoration: InputDecoration(hintText: "Udacity"),
+            onSaved:(val){
+              splatform=val;
+            });
 
     // Prerequisites
     final prereqText = titleGen(
@@ -76,7 +87,10 @@ class _AddCourseState extends State<AddCourses> {
             return "Please enter a valid pre requisites ";
           }
         },
-        decoration: InputDecoration(hintText: "Basic knowledge of HTML & CSS"));
+        decoration: InputDecoration(hintText: "Basic knowledge of HTML & CSS"),
+            onSaved:(val){
+              sprereq=val;
+            });
 
     // Link
     final linkText =
@@ -89,8 +103,11 @@ class _AddCourseState extends State<AddCourses> {
             return "Please enter a valid Course name";
           }
         },
-        decoration: InputDecoration(hintText: "https://www.example.com/"));
-    ;
+        decoration: InputDecoration(hintText: "https://www.example.com/"),
+            onSaved:(val){
+              slink=val;
+            });
+    
 
     // Type of Course
     final typeText = titleGen("Type", 12.0, FontWeight.bold, Colors.grey);
@@ -98,7 +115,7 @@ class _AddCourseState extends State<AddCourses> {
     // To change course type on selection from dropdown
     void _onCourseSelected(String newValueSelected) {
       setState(() {
-        this._courseTypeSelected = newValueSelected;
+        stype = newValueSelected;
       });
     }
 
@@ -124,7 +141,7 @@ class _AddCourseState extends State<AddCourses> {
     // To change course type on selection from dropdown
     void _onPriceSelected(String newValueSelected) {
       setState(() {
-        this._priceTypeSelected = newValueSelected;
+        sprice = newValueSelected;
       });
     }
 
@@ -156,7 +173,10 @@ class _AddCourseState extends State<AddCourses> {
           }
         },
         decoration:
-            InputDecoration(hintText: "JavaScript is a client side language"));
+            InputDecoration(hintText: "JavaScript is a client side language"),
+            onSaved:(val){
+              sdesc=val;
+            });
 
     // Padding between textfields
     final spacer = SizedBox(height: 10.0);
@@ -170,18 +190,7 @@ class _AddCourseState extends State<AddCourses> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          Course c1 = Course(
-              11,
-              cnameController.text,
-              'Devloper',
-              descController.text,
-              this._courseTypeSelected,
-              linkController.text,
-              platformController.text,
-              0,
-              this._priceTypeSelected,
-              prereqController.text);
-          c1.flush();
+          writeData();
         },
         child: Text("Add Course",
             textAlign: TextAlign.center,
@@ -195,11 +204,16 @@ class _AddCourseState extends State<AddCourses> {
         appBar: topBar,
         drawer: AppDrawer(),
         body: SingleChildScrollView(
-            child: Center(
+            child:Center(
+              
                 child: Container(
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsets.all(15.0),
+                      child:Form( 
+                         key: _key,
+                         autovalidate: _autovalidate,
+        
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -228,6 +242,34 @@ class _AddCourseState extends State<AddCourses> {
                           sButton
                         ],
                       ),
-                    )))));
+                    ))))));
+  }
+   void writeData(){
+        if (_key.currentState.validate()) {
+          cid++;
+      _key.currentState.save();
+      final DatabaseReference ref = FirebaseDatabase.instance.reference();
+      var data = {
+        "cid":cid,
+        "cname": scname,
+        "uname":"a",
+        "desc":sdesc,
+        "type":stype,
+        "link":slink,
+        "platform":splatform,
+        "upvCount":"10",
+        "price":sprice,
+        "preReq":sprereq,
+      };
+      ref.child('course').push().set(data).then((v) {
+        _key.currentState.reset();
+      });
+      Navigator.pop(context);
+    } 
+    else {
+      setState(() {
+        _autovalidate = true;
+      });
+    }
   }
 }
