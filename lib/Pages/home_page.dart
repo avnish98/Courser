@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 // From Courser
@@ -5,6 +7,8 @@ import "package:courser/Basic UI Components/drawer.dart";
 import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
 
+// Firebase
+import 'package:firebase_database/firebase_database.dart';
 Widget callHome() {
   Course currCourse = Course(
       11,
@@ -97,25 +101,38 @@ Course currCourse8 = Course(
 
   List<Course> courseList = [currCourse, currCourse2, currCourse3, currCourse4,currCourse5,currCourse6,currCourse7,currCourse8];
 
-  return (MyHomePage(courseList));
+  return (MyHomePage());
 }
 
-class MyHomePage extends StatefulWidget {
-  List<Course> c;
-
-  MyHomePage(List<Course> courseList) {
-    this.c = courseList;
-  }
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState(c);
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePage extends StatelessWidget {
+ 
   List<Course> c1;
-
-  _MyHomePageState(List<Course> courseList) {
+  /*
+  MyHomePage(List<Course> courseList) {
     this.c1 = courseList;
+  }
+  */
+  @override
+  void initState(){
+    DatabaseReference dbref=FirebaseDatabase.instance.reference();
+    dbref.child('courses').child('0').once().then((DataSnapshot snap){
+        /*Course c;
+        c.loadData(snap.value);*/
+        var data=snap.value;
+        Course c=new Course(
+          data['cid'],
+           data['cname'], 
+           data['uname'], 
+           data['desc'],
+           data['type'], 
+           data['link'], 
+           data['platform'], 
+           data['upvCount'], 
+           data['price'], 
+           data['preReq']);
+        this.c1 = [c];
+        print('${c1.length}');
+    });
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
