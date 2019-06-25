@@ -10,9 +10,8 @@ import 'package:courser/DB Interface/structures.dart';
 /* Used at 
 Add Courses page
 Course Description page
-
-
 */
+
 Widget titleGen(String title, double size, var weight, var tcolor) {
   return Align(
     alignment: Alignment.centerLeft,
@@ -29,13 +28,11 @@ Widget titleGen(String title, double size, var weight, var tcolor) {
   );
 }
 
-// Generates a description
-/* Used at 
-Course Description page
+ // Generates a description
+ /* Used at
+ Course Description page
+ */
 
-
-
-*/
 Widget valueGen(String value) {
   return Align(
     alignment: Alignment.centerLeft,
@@ -139,7 +136,7 @@ Widget CourseCards(BuildContext context, List<Course> courseList) {
                 child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/python.jpg"),
+                  image: AssetImage("assets/images/ML.jpg"),
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topCenter,
                 ),
