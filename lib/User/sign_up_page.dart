@@ -164,7 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
       user = await mAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       Navigator.push(
-          context, MaterialPageRoute(builder: (BuildContext) => callHome()));
+          context, MaterialPageRoute(builder: (BuildContext) => MyHomePage()));
     } catch (e) {
       print(e.toString());
     }

@@ -119,6 +119,11 @@ Upvoted Courses Page
 
 
 */
+
+String FindImage(String input){
+
+}
+
 Widget CourseCards(BuildContext context, List<Course> courseList) {
   return GridView.count(
       crossAxisCount: 2,
@@ -136,7 +141,8 @@ Widget CourseCards(BuildContext context, List<Course> courseList) {
                 child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/k.jpeg"),
+ 
+                  image: FindImage(courseList[index].type),
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topCenter,
                 ),

@@ -8,6 +8,6 @@ Widget UserSignInCheck(int val) {
   if (val == 0) {
     return LoginPage();
   } else if (val == 1) {
-    return callHome();
+    return MyHomePage();
   }
 }
