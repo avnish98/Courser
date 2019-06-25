@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
       user = await mAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       Navigator.push(
-          context, MaterialPageRoute(builder: (BuildContext) => callHome()));
+          context, MaterialPageRoute(builder: (BuildContext) => MyHomePage()));
     } catch (e) {
       print(e.toString());
     } finally {

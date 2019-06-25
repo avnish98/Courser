@@ -9,7 +9,8 @@ import 'package:courser/DB Interface/structures.dart';
 
 // Firebase
 import 'package:firebase_database/firebase_database.dart';
-Widget callHome() {
+/*
+Widget MyHomePage() {
   Course currCourse = Course(
       11,
       "Advanced Python Programming",
@@ -103,37 +104,61 @@ Course currCourse8 = Course(
 
   return (MyHomePage());
 }
+*/
 
-class MyHomePage extends StatelessWidget {
- 
-  List<Course> c1;
+class MyHomePage extends StatefulWidget {
+ @override
+ _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage>{
+   List<Course> c1 = [];
   /*
   MyHomePage(List<Course> courseList) {
     this.c1 = courseList;
   }
+  
   */
   @override
-  void initState(){
-    DatabaseReference dbref=FirebaseDatabase.instance.reference();
-    dbref.child('courses').child('0').once().then((DataSnapshot snap){
-        /*Course c;
-        c.loadData(snap.value);*/
-        var data=snap.value;
-        Course c=new Course(
-          data['cid'],
-           data['cname'], 
-           data['uname'], 
-           data['desc'],
-           data['type'], 
-           data['link'], 
-           data['platform'], 
-           data['upvCount'], 
-           data['price'], 
-           data['preReq']);
-        this.c1 = [c];
-        print('${c1.length}');
+  void initState() {
+    
+    DatabaseReference ref=FirebaseDatabase.instance.reference();
+        ref.child('courses').limitToFirst(10).once().then((DataSnapshot snap){
+      var data=snap.value;
+      for(int i=0;i<10;i++){
+        
+      
+          Course c;
+            c=new Course(
+              data[i]['cid'],
+              data[i]['cname'],
+                data[i]['uname'],
+                data[i]['desc'],
+                data[i]['type'],
+                data[i]['link'],
+
+
+              data[i]['platform'],
+              data[i]['upvCount'],
+              data[i]['price'],data[i]['prereq'],
+
+
+
+              );
+              this.c1.add(c);
+              print('$c');
+           
+         // print('${c.cname}');
+      }
+     setState(() {
+     print('length ${c1.length}');
+    });     
     });
+     
+    
+   
   }
+
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
