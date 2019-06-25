@@ -1,3 +1,5 @@
+/* This file contains code for Course Description page */
+
 import 'package:flutter/material.dart';
 
 // From Courser
@@ -18,7 +20,7 @@ Widget reviewGen() {
 }
 
 class CourseDesc extends StatelessWidget {
-  Course currCourse;
+  Course currCourse; //current course
 
   CourseDesc(Course c1) {
     this.currCourse = c1;
