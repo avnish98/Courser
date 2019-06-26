@@ -25,7 +25,7 @@ class AppDrawer extends StatelessWidget {
               child: Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    'Username goes here',
+                    '',
                     style: TextStyle(color: Colors.white),
                   )),
             ),
@@ -47,24 +47,6 @@ class AppDrawer extends StatelessWidget {
                       builder: (BuildContext) => AddCourses(this.currUser)));
             },
           ),
-          new ListTile(
-            title: new Text('Added courses'),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (BuildContext) => AddedCourses(this.currUser)));
-            },
-          ),
-          new ListTile(
-            title: new Text('Upvoted courses'),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (BuildContext) => UpvCourses(this.currUser)));
-            },
-          )
         ],
       ),
     );
