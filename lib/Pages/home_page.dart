@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
         drawer: AppDrawer(this.currUser),
         body: Padding(
             padding: EdgeInsets.all(15.0),
-            child: TitleCourseCards("Recommendations for you", itemList)));
+            child: CourseCards(context, c1, this.currUser)));//TitleCourseCards("Recommendations for you", itemList)));
   }
 }
 
