@@ -136,7 +136,7 @@ Widget CourseCards(BuildContext context, List<Course> courseList) {
                 child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/ML.jpg"),
+                  image: AssetImage("assets/images/k.jpeg"),
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topCenter,
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:courser/User/checks.dart';
+import 'package:courser/User/login_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'OpenCourser',  // app name
-      home: UserSignInCheck(_userSignedIn),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,  //to remove debug tag
     );
   }
