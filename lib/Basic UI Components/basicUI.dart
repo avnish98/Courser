@@ -121,7 +121,26 @@ Upvoted Courses Page
 */
 
 String FindImage(String input){
+  Map imageAddress = {
+  'Kotlin': 'assets/images/k.jpeg',
+  'Python':'assets/images/python.jpg',
+  'C':'assets/images/c.jpg',
+  'C++':'assets/images/cpp.png',
+  'Web Develpoment':'assets/images/wd.jpeg',
+  'Data Analysis':'assets/images/da.jpg',
+  'Machine Learning':'assets/images/ML.jpg',
+  'Flutter':'assets/images/f.jpeg',
+  'Java':'assets/images/j.png',
 
+  };
+
+  if (imageAddress[input] != null){
+  return imageAddress[input];
+  }
+
+  else{
+    return ('assets/images/python.jpg');
+  }
 }
 
 Widget CourseCards(BuildContext context, List<Course> courseList) {
@@ -142,7 +161,7 @@ Widget CourseCards(BuildContext context, List<Course> courseList) {
               decoration: BoxDecoration(
                 image: DecorationImage(
  
-                  image: FindImage(courseList[index].type),
+                  image: AssetImage(FindImage(courseList[index].type)),
                   fit: BoxFit.fitWidth,
                   alignment: Alignment.topCenter,
                 ),

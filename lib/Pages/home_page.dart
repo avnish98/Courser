@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import "package:courser/Basic UI Components/drawer.dart";
 import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
+import 'package:courser/';
 
 // Firebase
 import 'package:firebase_database/firebase_database.dart';
@@ -107,12 +108,14 @@ Course currCourse8 = Course(
 */
 
 class MyHomePage extends StatefulWidget {
- @override
- _MyHomePageState createState() => _MyHomePageState();
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>{
-   List<Course> c1 = [];
+class _MyHomePageState extends State<MyHomePage> {
+  List<Course> c1 = [];
+  List<String> cnameList = [];
+
   /*
   MyHomePage(List<Course> courseList) {
     this.c1 = courseList;
@@ -121,44 +124,38 @@ class _MyHomePageState extends State<MyHomePage>{
   */
   @override
   void initState() {
-    
-    DatabaseReference ref=FirebaseDatabase.instance.reference();
-        ref.child('courses').limitToFirst(10).once().then((DataSnapshot snap){
-      var data=snap.value;
-      for(int i=0;i<10;i++){
-        
-      
-          Course c;
-            c=new Course(
-              data[i]['cid'],
-              data[i]['cname'],
-                data[i]['uname'],
-                data[i]['desc'],
-                data[i]['type'],
-                data[i]['link'],
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    ref
+        .child('courses')
+        .orderByChild('upvCount')
+        .once()
+        .then((DataSnapshot snap) {
+      var data = snap.value;
+      for (int i = 0; i < data.length; i++) {
+        Course c;
+        c = new Course(
+          data[i]['cid'],
+          data[i]['cname'],
+          data[i]['uname'],
+          data[i]['desc'],
+          data[i]['type'],
+          data[i]['link'],
+          data[i]['platform'],
+          data[i]['upvCount'],
+          data[i]['price'],
+          data[i]['prereq'],
+        );
+        this.c1.add(c);
+        this.cnameList.add(data[i]['cname']);
+        print('$c');
 
-
-              data[i]['platform'],
-              data[i]['upvCount'],
-              data[i]['price'],data[i]['prereq'],
-
-
-
-              );
-              this.c1.add(c);
-              print('$c');
-           
-         // print('${c.cname}');
+        // print('${c.cname}');
       }
-     setState(() {
-     print('length ${c1.length}');
-    });     
+      setState(() {
+        print('length ${c1.length}');
+      });
     });
-     
-    
-   
   }
-
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -189,7 +186,9 @@ class _MyHomePageState extends State<MyHomePage>{
             Icons.search,
             color: Colors.deepPurple,
           ),
-          onPressed: () {},
+          onPressed: () {
+            showSearch(context: context, delegate: DataSearch(this.cnameList));
+          },
         )
       ],
     );
@@ -236,5 +235,89 @@ class _MyHomePageState extends State<MyHomePage>{
         body: Padding(
             padding: EdgeInsets.all(15.0),
             child: TitleCourseCards("Recommendations for you", itemList)));
+  }
+}
+
+class DataSearch extends SearchDelegate {
+  List<String> cnameList;
+
+  DataSearch(List<String> input) {
+    this.cnameList = input;
+  }
+
+  List<String> popCourses = [
+    'Python for Everybody Specialization',
+    'Programming for Everybody (Getting Started with Python)',
+    'Python Data Structures',
+    'Applied Data Science with Python Specialization',
+    'Introduction to Data Science in Python'
+  ];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+
+    List<String> results = cnameList.where((p) => p.startsWith(query)).toList();
+    return ListView.builder(itemBuilder: (context, index) {
+      return GestureDetector(
+          onTap: (){
+
+          },
+          child:Card(
+        child: Center(
+          child: Text(results[index]),
+        ),
+      ));
+    },
+    itemCount: results.length,);
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+
+    final suggestions = query.isEmpty
+        ? popCourses
+        : cnameList.where((p) => p.startsWith(query)).toList();
+
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            showResults(context);
+          },
+          title: Text(suggestions[index]),
+        );
+      },
+      itemCount: suggestions.length,
+    );
   }
 }
