@@ -88,28 +88,24 @@ class CourseReview {
 
 class User {
   int uid; //user id
-  String uname;  //user name
-  List<int> addedCourses;  //courses added  by user
-  List<int> upvotedCourses;  //courses upvoted by user
-  List<int> reviewedCourses;  //courses reviewed by user
-  String interest1;  //first interest
+  String uname; //user name
+  //List<int> addedCourses; //courses added  by user
+  List<int> upvotedCourses; //courses upvoted by user
+  List<int> reviewedCourses; //courses reviewed by user
+  /*String interest1;  //first interest
   String interest2;  //second interest
-  String interest3;  //third interest
+  String interest3;*/ //third interest
 
   //constructor User
-  User(int uid, String uname, List<int> addedCourses,
-      List<int> upvotedCourses, List<int> reviewedCourses, String interest1,
-      String interest2, String interest3,) {
-        this.uid = uid;
-        this.uname =uname;
-        this.addedCourses =addedCourses;
-        this.upvotedCourses =upvotedCourses;
-        this.reviewedCourses =reviewedCourses;
-        this.interest1 =interest1;
-        this.interest2 =interest2;
-        this.interest3 =interest3;
-  }
+  User(int uid, String uname,
+      List<int> upvotedCourses, List<int> reviewedCourses,) {
+    this.uid = uid;
+    this.uname = uname;
 
+    this.upvotedCourses = upvotedCourses;
+    this.reviewedCourses = reviewedCourses;
+  }
+/*
   User fetchData(Map fetchedData){
     fetchedData['uid'] = this.uid;
     fetchedData['uname'] = this.uname;
@@ -120,6 +116,8 @@ class User {
     fetchedData['interest2'] = this.interest2;
     fetchedData['interest3'] = this.interest3;
   }
+}
+*/
 }
 
 Course findCourse(String courseName, List<Course> courseList){

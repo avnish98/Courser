@@ -1,6 +1,6 @@
 import 'package:courser/User/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:courser/User/checks.dart';
+//import 'package:courser/User/checks.dart';
 import 'package:courser/Pages/home_page.dart';
 
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
 
       title: 'OpenCourser',
-      home: MyHomePage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -52,14 +52,24 @@ Course currCourse4 = Course(
 List<Course> courseList = [currCourse, currCourse2, currCourse3, currCourse4];
 
 class AddedCourses extends StatefulWidget {
-  AddedCourses({Key key, this.title}) : super(key: key);
-  final String title;
+
+  User currUser;
+
+  AddedCourses(User u){
+    this.currUser = u;
+  }
 
   @override
-  _AddedCourseState createState() => _AddedCourseState();
+  _AddedCourseState createState() => _AddedCourseState(this.currUser);
 }
 
 class _AddedCourseState extends State<AddedCourses> {
+
+  User currUser;
+
+  _AddedCourseState(User u){
+    this.currUser = u;
+  }
   // TODO : Courses added by user
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<String> itemList = [
@@ -73,12 +83,12 @@ class _AddedCourseState extends State<AddedCourses> {
     // Appbar of added courses page
     final topBar = SecondaryAppBar('Courses added by you', _scaffoldKey);
 
-    final addedCourses = CourseCards(context, courseList);
+    final addedCourses = CourseCards(context, courseList, this.currUser);
 
     return Scaffold(
       key: _scaffoldKey,
       appBar: topBar,
-      drawer: AppDrawer(),
+      drawer: AppDrawer(this.currUser),
       body: addedCourses,
     );
   }

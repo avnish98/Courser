@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 // Firebase
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 // From Courser
 import 'package:courser/Pages/home_page.dart';
 import 'package:courser/User/sign_up_page.dart';
 import 'package:courser/Basic UI Components/basicUI.dart';
+import 'package:courser/DB Interface/structures.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -23,6 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
 
   TextStyle style = TextStyle(fontFamily: 'Roboto', fontSize: 20.0);
+
+  User currUser;
 
   @override
   Widget build(BuildContext context) {
@@ -171,8 +175,31 @@ class _LoginPageState extends State<LoginPage> {
     try {
       user = await mAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+
+      DatabaseReference userref = FirebaseDatabase.instance.reference();
+
+      userref.child('users').once().then((DataSnapshot snap){
+        var data = snap.value;
+        for (int i = 0; i < data.length; i++) {
+
+          if(data['uname']==emailController.text){
+
+          this.currUser = new User(
+            data[i]['uid'],
+            data[i]['uname'],
+            data[i]['upvCourses'],
+            data[i]['revCourses'],
+          );
+
+          break;
+      }
+          else{
+            continue;
+          }}});
+
+
       Navigator.push(
-          context, MaterialPageRoute(builder: (BuildContext) => MyHomePage()));
+          context, MaterialPageRoute(builder: (BuildContext) => MyHomePage(this.currUser)));
     } catch (e) {
       print(e.toString());
     } finally {

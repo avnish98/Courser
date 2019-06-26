@@ -52,14 +52,24 @@ Course currCourse4 = Course(
 List<Course> courseList = [currCourse, currCourse2, currCourse3, currCourse4];
 
 class UpvCourses extends StatefulWidget {
-  UpvCourses({Key key, this.title}) : super(key: key);
-  final String title;
+
+  User currUser;
+
+  UpvCourses(User u){
+    this.currUser = u;
+  }
 
   @override
-  _UpvCourseState createState() => _UpvCourseState();
+  _UpvCourseState createState() => _UpvCourseState(this.currUser);
 }
 
 class _UpvCourseState extends State<UpvCourses> {
+
+  User currUser;
+
+  _UpvCourseState(User u){
+    this.currUser = u;
+  }
   // TODO : Courses upvoted by user
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -74,12 +84,12 @@ class _UpvCourseState extends State<UpvCourses> {
     // Appbar of added courses page
     final topBar = SecondaryAppBar('Courses upvoted by you', _scaffoldKey);
 
-    final upvotedCourses = CourseCards(context, courseList);
+    final upvotedCourses = CourseCards(context, courseList, currUser);
 
     return Scaffold(
       key: _scaffoldKey,
       appBar: topBar,
-      drawer: AppDrawer(),
+      drawer: AppDrawer(currUser),
       body: upvotedCourses,
     );
   }

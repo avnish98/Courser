@@ -5,8 +5,16 @@ import 'package:courser/Pages/home_page.dart';
 import "package:courser/Pages/add_courses.dart";
 import 'package:courser/Pages/added_courses.dart';
 import 'package:courser/Pages/upvoted_courses.dart';
+import 'package:courser/DB Interface/structures.dart';
 
 class AppDrawer extends StatelessWidget {
+
+  User currUser;
+
+  AppDrawer(User u){
+    this.currUser = u;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -27,7 +35,7 @@ class AppDrawer extends StatelessWidget {
             title: new Text('Home '),
             onTap: () {
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (BuildContext) => MyHomePage()));
+                  new MaterialPageRoute(builder: (BuildContext) => MyHomePage(this.currUser)));
             },
           ),
           new ListTile(
@@ -36,7 +44,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => AddCourses()));
+                      builder: (BuildContext) => AddCourses(this.currUser)));
             },
           ),
           new ListTile(
@@ -45,7 +53,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => AddedCourses()));
+                      builder: (BuildContext) => AddedCourses(this.currUser)));
             },
           ),
           new ListTile(
@@ -54,7 +62,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (BuildContext) => UpvCourses()));
+                      builder: (BuildContext) => UpvCourses(this.currUser)));
             },
           )
         ],

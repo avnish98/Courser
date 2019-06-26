@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Firebase
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 // From Courser
 import 'package:courser/Pages/home_page.dart';
@@ -22,6 +23,22 @@ final FirebaseAuth mAuth = FirebaseAuth.instance;
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  int maxUsers;
+
+  @override
+  Widget initState(){
+    DatabaseReference dbref = FirebaseDatabase.instance.reference();
+    dbref
+        .child('users')
+        .once()
+        .then((DataSnapshot snap){
+      this.maxUsers = snap.value.length;
+    });
+    setState(() {
+      print(this.maxUsers);
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,9 +181,19 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       user = await mAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      //User currUser = User(90, uname, addedCourses, upvotedCourses, reviewedCourses, interest1, interest2, interest3);
+      DatabaseReference userref = FirebaseDatabase.instance.reference();
+
+      userref.child('users').child('${this.maxUsers}').set({
+        'uid':this.maxUsers,
+        'uname':emailController.text,
+        'revCourses':[],
+        'upvCourses':[],
+      });
+
+      User currUser = User(maxUsers, emailController.text, [],[]);
+
       Navigator.push(
-          context, MaterialPageRoute(builder: (BuildContext) => MyHomePage()));
+          context, MaterialPageRoute(builder: (BuildContext) => MyHomePage(currUser)));
     } catch (e) {
       print(e.toString());
     }

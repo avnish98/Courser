@@ -10,50 +10,47 @@ import 'package:courser/Course/course_reviews.dart';
 // Firebase
 import 'package:firebase_database/firebase_database.dart';
 
-class CourseDesc extends StatefulWidget{
+class CourseDesc extends StatefulWidget {
   Course c;
+  User u;
 
-  CourseDesc(Course c){
+  CourseDesc(Course c, User u) {
     this.c = c;
+    this.u = u;
   }
 
   @override
-  _CourseDescPage createState() => _CourseDescPage(this.c);
+  _CourseDescPage createState() => _CourseDescPage(this.c, this.u);
 }
 
 class _CourseDescPage extends State<CourseDesc> {
   Course currCourse; //current course
+  User currUser;
   List<CourseReview> crList = [];
 
-  _CourseDescPage(Course c1) {
+  _CourseDescPage(Course c1, User u1) {
     this.currCourse = c1;
+    this.currUser = u1;
   }
 
   void initState() {
     DatabaseReference reviewRef = FirebaseDatabase.instance.reference();
-    reviewRef
-        .child('reviews')
-
-        .once()
-        .then((DataSnapshot snap) {
+    reviewRef.child('reviews').once().then((DataSnapshot snap) {
       var data = snap.value;
-      for(int i=0;i<data.length;i++){
-        if(data[i]['cid']==currCourse.cid){
+      for (int i = 0; i < data.length; i++) {
+        if (data[i]['cid'] == currCourse.cid) {
           CourseReview tempCr;
-          tempCr = CourseReview(data[i]['cid'], data[i]['uname'],data[i]['review']);
+          tempCr =
+              CourseReview(data[i]['cid'], data[i]['uname'], data[i]['review']);
           this.crList.add(tempCr);
-        }
-
-        else{
+        } else {
           continue;
         }
       }
-      setState((){
+      setState(() {
         print('length ${crList.length}');
       });
-
-        });
-
+    });
   }
 
   @override
@@ -98,7 +95,18 @@ class _CourseDescPage extends State<CourseDesc> {
       color: Colors.white,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () {},
+          onPressed: () {
+            //this.currCourse.upvCount = this.currCourse.upvCount + 1;
+            DatabaseReference courseRef = FirebaseDatabase.instance.reference();
+            courseRef
+                .child('courses')
+                .child('${this.currCourse.cid}')
+                .update({'upvCount': (this.currCourse.upvCount + 1)});
+            this.currUser.upvotedCourses.add(currCourse.cid);
+            courseRef.child('users').child('${this.currUser.uid}').update({
+              'upvCourses':this.currUser.upvotedCourses
+            });
+          },
           child: Icon(
             Icons.thumb_up,
             color: Colors.deepPurple,

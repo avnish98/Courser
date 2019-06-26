@@ -143,7 +143,7 @@ String FindImage(String input){
   }
 }
 
-Widget CourseCards(BuildContext context, List<Course> courseList) {
+Widget CourseCards(BuildContext context, List<Course> courseList, User currUser) {
   return GridView.count(
       crossAxisCount: 2,
       children: List.generate(courseList.length, (index) {
@@ -152,7 +152,7 @@ Widget CourseCards(BuildContext context, List<Course> courseList) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => CourseDesc(courseList[index])),
+                    builder: (context) => CourseDesc(courseList[index], currUser)),
               );
             },
             child: Card(

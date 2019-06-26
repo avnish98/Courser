@@ -12,15 +12,25 @@ import 'package:courser/Course/course_desc.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class MyHomePage extends StatefulWidget {
+
+  User currUser;
+
+  MyHomePage(User us){
+    this.currUser = us;
+  }
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(this.currUser);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Course> c1 = [];
   List<String> cnameList = [];
+  User currUser;
 
-
+  _MyHomePageState(User u){
+    this.currUser = u;
+  }
   /*
   MyHomePage(List<Course> courseList) {
     this.c1 = courseList;
@@ -89,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.deepPurple,
           ),
           onPressed: () {
-            showSearch(context: context, delegate: DataSearch(this.cnameList, this.c1));
+            showSearch(context: context, delegate: DataSearch(this.cnameList, this.c1, this.currUser));
           },
         )
       ],
@@ -115,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             height: 10.0,
           ),
-          new Expanded(child: CourseCards(context, c1)),
+          new Expanded(child: CourseCards(context, c1, this.currUser)),
         ]))
       ]);
     }
@@ -133,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: topBar,
-        drawer: AppDrawer(),
+        drawer: AppDrawer(this.currUser),
         body: Padding(
             padding: EdgeInsets.all(15.0),
             child: TitleCourseCards("Recommendations for you", itemList)));
@@ -143,10 +153,29 @@ class _MyHomePageState extends State<MyHomePage> {
 class DataSearch extends SearchDelegate {
   List<String> cnameList;
   List<Course> courseList;
+  User currUser;
 
-  DataSearch(List<String> input, List<Course> input2) {
+  DataSearch(List<String> input, List<Course> input2, User input3) {
     this.cnameList = input;
     this.courseList = input2;
+    this.currUser = input3;
+  }
+
+  Course findCourse(String courseName, List<Course> courseList){
+
+    Course foundCourse;
+
+    for(int i=0; i<courseList.length; i++){
+      if(courseList[i].cname == courseName){
+        foundCourse =  courseList[i];
+        break;
+      }
+
+      else{
+        continue;
+      }
+    }
+    return foundCourse;
   }
 
   List<String> popCourses = [
@@ -194,7 +223,7 @@ class DataSearch extends SearchDelegate {
       return GestureDetector(
           onTap: (){
               Course tempCourse = findCourse(results[index], courseList);
-              Navigator.push(context, MaterialPageRoute(builder: (context){return CourseDesc(tempCourse);}));
+              Navigator.push(context, MaterialPageRoute(builder: (context){return CourseDesc(tempCourse, this.currUser);}));
           },
           child:Container(
               height: 100.0,
@@ -207,6 +236,7 @@ class DataSearch extends SearchDelegate {
     },
     itemCount: results.length,);
   }
+
 
   @override
   Widget buildSuggestions(BuildContext context) {
@@ -222,7 +252,7 @@ class DataSearch extends SearchDelegate {
         return ListTile(
           onTap: () {
             Course tempCourse = findCourse(results[index], courseList);
-            Navigator.push(context, MaterialPageRoute(builder: (context){return CourseDesc(tempCourse);}));
+            Navigator.push(context, MaterialPageRoute(builder: (context){return CourseDesc(tempCourse, this.currUser);}));
             //showResults(context);
           },
           title: Text(suggestions[index]),

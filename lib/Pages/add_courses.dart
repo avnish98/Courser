@@ -9,11 +9,15 @@ import 'package:courser/Pages/home_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class AddCourses extends StatefulWidget {
-  AddCourses({Key key, this.title}) : super(key: key);
-  final String title;
+
+  User currUser;
+
+  AddCourses(User u){
+    this.currUser = u;
+  }
 
   @override
-  _AddCourseState createState() => _AddCourseState();
+  _AddCourseState createState() => _AddCourseState(this.currUser);
 }
 
 class _AddCourseState extends State<AddCourses> {
@@ -31,6 +35,11 @@ class _AddCourseState extends State<AddCourses> {
   final typeController = TextEditingController();
   final priceController = TextEditingController();
   final descController = TextEditingController();
+  User currUser;
+
+  _AddCourseState(User u){
+    this.currUser = u;
+  }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -193,7 +202,7 @@ class _AddCourseState extends State<AddCourses> {
           addref.child('courses').child('${this.maxCourses}').set({
           'cid' :this.maxCourses,
           'cname' :cnameController.text,
-          'uname' :'Developer',
+          'uname' :this.currUser.uname,
           'desc' :descController.text,
           'type' :this._courseTypeSelected,
           'link' :linkController.text,
@@ -203,7 +212,7 @@ class _AddCourseState extends State<AddCourses> {
           'prereq':prereqController.text
           });
           
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage(this.currUser)));
         },
         child: Text("Add Course",
             textAlign: TextAlign.center,
@@ -215,7 +224,7 @@ class _AddCourseState extends State<AddCourses> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: topBar,
-        drawer: AppDrawer(),
+        drawer: AppDrawer(this.currUser),
         body: SingleChildScrollView(
             child: Center(
                 child: Container(
