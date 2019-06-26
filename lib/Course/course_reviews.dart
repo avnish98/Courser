@@ -14,7 +14,9 @@ class ReviewContainer extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Make a review box
+    // TODO: Make a review boxes
+
+    try{
     return SizedBox(
         height: (100.0)*cr.length,
         child: ListView.builder(
@@ -33,5 +35,10 @@ class ReviewContainer extends StatelessWidget{
                     ),
                   ));
             }));
+  }
+  catch(e){
+
+    return SizedBox(height: 200.0,);
+    }
   }
 }

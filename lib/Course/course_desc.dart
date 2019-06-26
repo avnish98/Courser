@@ -7,23 +7,53 @@ import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
 import 'package:courser/Course/course_reviews.dart';
 
-Widget reviewGen() {
-  CourseReview cr1 = CourseReview(11, 'Manish', 'Good course');
-  CourseReview cr2 = CourseReview(
-      12, 'Nitesh', 'Could have been a better explaination');
-  CourseReview cr3 = CourseReview(
-      11, 'Lalit', 'Instructor\'s voice isn\'t clear');
+// Firebase
+import 'package:firebase_database/firebase_database.dart';
 
-  List <CourseReview> crList = [cr1, cr2, cr3];
+class CourseDesc extends StatefulWidget{
+  Course c;
 
-  return ReviewContainer(crList);
+  CourseDesc(Course c){
+    this.c = c;
+  }
+
+  @override
+  _CourseDescPage createState() => _CourseDescPage(this.c);
 }
 
-class CourseDesc extends StatelessWidget {
+class _CourseDescPage extends State<CourseDesc> {
   Course currCourse; //current course
+  List<CourseReview> crList = [];
 
-  CourseDesc(Course c1) {
+  _CourseDescPage(Course c1) {
     this.currCourse = c1;
+  }
+
+  void initState() {
+    DatabaseReference reviewRef = FirebaseDatabase.instance.reference();
+    reviewRef
+        .child('reviews')
+
+        .once()
+        .then((DataSnapshot snap) {
+      var data = snap.value;
+      for(int i=0;i<data.length;i++){
+        if(data[i]['cid']==currCourse.cid){
+          CourseReview tempCr;
+          tempCr = CourseReview(data[i]['cid'], data[i]['uname'],data[i]['review']);
+          this.crList.add(tempCr);
+        }
+
+        else{
+          continue;
+        }
+      }
+      setState((){
+        print('length ${crList.length}');
+      });
+
+        });
+
   }
 
   @override
@@ -96,7 +126,7 @@ class CourseDesc extends StatelessWidget {
     final reviewSubButton =
         ButtonGen(context, "SUBMIT REVIEW", Colors.white, Colors.black);
 
-    final reviewContainer = reviewGen();
+    final reviewContainer = ReviewContainer(this.crList);
 
     final spacerCourseDesc = SizedBox(
       height: 20.0,
@@ -131,7 +161,7 @@ class CourseDesc extends StatelessWidget {
               spacerCourseDesc,
               linkAndUpvote,
               spacerCourseDesc,
-              titleGen("Reviews", 18.0, FontWeight.bold, Colors.black),
+              titleGen("Add a review", 18.0, FontWeight.bold, Colors.black),
               reviewBox,
               spacerCourseDesc,
               reviewSubButton,

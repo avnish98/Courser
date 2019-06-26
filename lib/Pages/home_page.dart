@@ -6,106 +6,10 @@ import 'package:flutter/material.dart';
 import "package:courser/Basic UI Components/drawer.dart";
 import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
-import 'package:courser/';
+import 'package:courser/Course/course_desc.dart';
 
 // Firebase
 import 'package:firebase_database/firebase_database.dart';
-/*
-Widget MyHomePage() {
-  Course currCourse = Course(
-      11,
-      "Advanced Python Programming",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "Somethign link");
-  Course currCourse2 = Course(
-      11,
-      "Advanced Python Programming 2",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "HTML");
-  Course currCourse3 = Course(
-      11,
-      "Advanced Python Programming 3",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "CSS");
-  Course currCourse4 = Course(
-      11,
-      "Advanced Python Programming 4 ",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "JS");
-Course currCourse5 = Course(
-      11,
-      "Advanced Python Programming 4 ",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "JS");
-Course currCourse6 = Course(
-      11,
-      "Advanced Python Programming 4 ",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "JS");
-Course currCourse7 = Course(
-      11,
-      "Advanced Python Programming 4 ",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "JS");
-Course currCourse8 = Course(
-      11,
-      "Advanced Python Programming 4 ",
-      'Developer',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      'Python',
-      'https://www.example.com',
-      'Udacity',
-      12,
-      'Free',
-      "JS");
-
-  List<Course> courseList = [currCourse, currCourse2, currCourse3, currCourse4,currCourse5,currCourse6,currCourse7,currCourse8];
-
-  return (MyHomePage());
-}
-*/
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -187,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.deepPurple,
           ),
           onPressed: () {
-            showSearch(context: context, delegate: DataSearch(this.cnameList));
+            showSearch(context: context, delegate: DataSearch(this.cnameList, this.c1));
           },
         )
       ],
@@ -240,9 +144,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class DataSearch extends SearchDelegate {
   List<String> cnameList;
+  List<Course> courseList;
 
-  DataSearch(List<String> input) {
+  DataSearch(List<String> input, List<Course> input2) {
     this.cnameList = input;
+    this.courseList = input2;
   }
 
   List<String> popCourses = [
@@ -289,13 +195,17 @@ class DataSearch extends SearchDelegate {
     return ListView.builder(itemBuilder: (context, index) {
       return GestureDetector(
           onTap: (){
-
+              Course tempCourse = findCourse(results[index], courseList);
+              Navigator.push(context, MaterialPageRoute(builder: (context){return CourseDesc(tempCourse);}));
           },
-          child:Card(
+          child:Container(
+              height: 100.0,
+              child: Card(
+
         child: Center(
           child: Text(results[index]),
         ),
-      ));
+      )));
     },
     itemCount: results.length,);
   }
@@ -304,15 +214,18 @@ class DataSearch extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
 
+
     final suggestions = query.isEmpty
         ? popCourses
         : cnameList.where((p) => p.startsWith(query)).toList();
-
+    List<String> results = cnameList.where((p) => p.startsWith(query)).toList();
     return ListView.builder(
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {
-            showResults(context);
+            Course tempCourse = findCourse(results[index], courseList);
+            Navigator.push(context, MaterialPageRoute(builder: (context){return CourseDesc(tempCourse);}));
+            //showResults(context);
           },
           title: Text(suggestions[index]),
         );
