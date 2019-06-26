@@ -20,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Course> c1 = [];
   List<String> cnameList = [];
 
+
   /*
   MyHomePage(List<Course> courseList) {
     this.c1 = courseList;
@@ -31,7 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     ref
         .child('courses')
-        .orderByChild('upvCount')
         .once()
         .then((DataSnapshot snap) {
       var data = snap.value;
@@ -52,8 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
         this.c1.add(c);
         this.cnameList.add(data[i]['cname']);
         print('$c');
-
-        // print('${c.cname}');
       }
       setState(() {
         print('length ${c1.length}');

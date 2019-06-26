@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
 
       title: 'OpenCourser',
-      home: LoginPage(),
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

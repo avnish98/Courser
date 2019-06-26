@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 // From Courser
 import 'package:courser/Pages/home_page.dart';
 import 'package:courser/User/login_page.dart';
+import 'package:courser/DB Interface/structures.dart';
 import 'package:courser/Basic UI Components/basicUI.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -163,6 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       user = await mAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+      //User currUser = User(90, uname, addedCourses, upvotedCourses, reviewedCourses, interest1, interest2, interest3);
       Navigator.push(
           context, MaterialPageRoute(builder: (BuildContext) => MyHomePage()));
     } catch (e) {

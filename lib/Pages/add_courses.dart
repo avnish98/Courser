@@ -23,7 +23,7 @@ class _AddCourseState extends State<AddCourses> {
 
   var _priceTypes = ['Free', 'Paid'];
   var _priceTypeSelected = 'Free';
-
+  int maxCourses;
   final cnameController = TextEditingController();
   final platformController = TextEditingController();
   final prereqController = TextEditingController();
@@ -33,6 +33,21 @@ class _AddCourseState extends State<AddCourses> {
   final descController = TextEditingController();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  @override
+  Widget initState(){
+    DatabaseReference dbref = FirebaseDatabase.instance.reference();
+    dbref
+        .child('courses')
+        .once()
+        .then((DataSnapshot snap){
+      this.maxCourses = snap.value.length;
+    });
+    setState(() {
+      print(this.maxCourses);
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,24 +187,11 @@ class _AddCourseState extends State<AddCourses> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {/*
-          Course c1 = Course(
-              11,
-              cnameController.text,
-              'Devloper',
-              descController.text,
-              this._courseTypeSelected,
-              linkController.text,
-              platformController.text,
-              0,
-              this._priceTypeSelected,
-              prereqController.text);
-          c1.flush();*/
-          int newKey;
-          DatabaseReference dbref = FirebaseDatabase.instance.reference();
+        onPressed: () {
+          DatabaseReference addref = FirebaseDatabase.instance.reference();
 
-          dbref.child('courses').child('99').set({
-          'cid' :99,
+          addref.child('courses').child('${this.maxCourses}').set({
+          'cid' :this.maxCourses,
           'cname' :cnameController.text,
           'uname' :'Developer',
           'desc' :descController.text,
