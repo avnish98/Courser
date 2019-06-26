@@ -27,6 +27,8 @@ class _CourseDescPage extends State<CourseDesc> {
   Course currCourse; //current course
   User currUser;
   List<CourseReview> crList = [];
+  int maxReviews;
+  final reviewController = TextEditingController();
 
   _CourseDescPage(Course c1, User u1) {
     this.currCourse = c1;
@@ -48,6 +50,7 @@ class _CourseDescPage extends State<CourseDesc> {
         }
       }
       setState(() {
+        maxReviews = crList.length;
         print('length ${crList.length}');
       });
     });
@@ -129,10 +132,30 @@ class _CourseDescPage extends State<CourseDesc> {
 
     // Reviews
     final reviewBox = TextField(
+      controller: reviewController,
         decoration: InputDecoration(hintText: "Add your comment here....."));
 
-    final reviewSubButton =
-        ButtonGen(context, "SUBMIT REVIEW", Colors.white, Colors.black);
+    final reviewSubButton = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(10.0),
+      color: Colors.black,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          DatabaseReference reviewref = FirebaseDatabase.instance.reference();
+          reviewref.child('reviews').child('${this.maxReviews}').set({
+            'cid':currCourse.cid,
+            'rid':maxReviews,
+            'uname':currUser.uname,
+            'review':reviewController.text
+          });
+        },
+        child: Text('Submit Review',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 21.0, color: Colors.white)),
+      ),
+    );
 
     final reviewContainer = ReviewContainer(this.crList);
 
