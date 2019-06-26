@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:courser/Basic UI Components/drawer.dart';
 import 'package:courser/Basic UI Components/basicUI.dart';
 import 'package:courser/DB Interface/structures.dart';
+import 'package:courser/Pages/home_page.dart';
+
+import 'package:firebase_database/firebase_database.dart';
 
 class AddCourses extends StatefulWidget {
   AddCourses({Key key, this.title}) : super(key: key);
@@ -169,7 +172,7 @@ class _AddCourseState extends State<AddCourses> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
+        onPressed: () {/*
           Course c1 = Course(
               11,
               cnameController.text,
@@ -181,7 +184,24 @@ class _AddCourseState extends State<AddCourses> {
               0,
               this._priceTypeSelected,
               prereqController.text);
-          c1.flush();
+          c1.flush();*/
+          int newKey;
+          DatabaseReference dbref = FirebaseDatabase.instance.reference();
+
+          dbref.child('courses').child('99').set({
+          'cid' :99,
+          'cname' :cnameController.text,
+          'uname' :'Developer',
+          'desc' :descController.text,
+          'type' :this._courseTypeSelected,
+          'link' :linkController.text,
+          'platform' :platformController.text,
+          'upvCount' :0,
+          'price':this._priceTypeSelected,
+          'prereq':prereqController.text
+          });
+          
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
         },
         child: Text("Add Course",
             textAlign: TextAlign.center,

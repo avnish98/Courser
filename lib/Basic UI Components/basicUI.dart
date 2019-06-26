@@ -129,7 +129,7 @@ String FindImage(String input){
   'Web Develpoment':'assets/images/wd.jpeg',
   'Data Analysis':'assets/images/da.jpg',
   'Machine Learning':'assets/images/ML.jpg',
-  'Flutter':'assets/images/f.jpeg',
+  //'Flutter':'assets/images/f.jpeg',
   'Java':'assets/images/j.png',
 
   };
