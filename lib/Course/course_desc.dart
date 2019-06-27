@@ -123,10 +123,7 @@ class _CourseDescPage extends State<CourseDesc> {
           width: 20.0,
         ),
         titleGen("${currCourse.upvCount}", 18.0, FontWeight.bold, Colors.black),
-        SizedBox(
-          width: 100.0,
-        ),
-        linkButton
+
       ],
     );
 
@@ -190,13 +187,14 @@ class _CourseDescPage extends State<CourseDesc> {
               titleGen("Added by", 18.0, FontWeight.bold, Colors.black),
               valueGen(currCourse.uname),
               spacerCourseDesc,
-              linkAndUpvote,
+              titleGen("Link to Course", 18.0, FontWeight.bold, Colors.black),
+              valueGen(currCourse.link),
               spacerCourseDesc,
               titleGen("Add a review", 18.0, FontWeight.bold, Colors.black),
               reviewBox,
               spacerCourseDesc,
               reviewSubButton,
-              spacerCourseDesc,
+              SizedBox(height:30.0),
               titleGen("Reviews", 18.0, FontWeight.bold, Colors.black),
               reviewContainer
             ],

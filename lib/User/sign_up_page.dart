@@ -182,12 +182,12 @@ class _SignUpPageState extends State<SignUpPage> {
       user = await mAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       DatabaseReference userref = FirebaseDatabase.instance.reference();
-
+      List<int> cur = [0];
       userref.child('users').child('${this.maxUsers}').set({
         'uid':this.maxUsers,
         'uname':emailController.text,
-        'revCourses':[],
-        'upvCourses':[],
+        'revCourses':cur,
+        'upvCourses':cur,
       });
 
       User currUser = User(maxUsers, emailController.text, [],[]);

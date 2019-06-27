@@ -172,6 +172,7 @@ class _LoginPageState extends State<LoginPage> {
   // Authenticates sign in from Firebase
   void signin() async {
     FirebaseUser user;
+
     try {
       user = await mAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
@@ -182,9 +183,8 @@ class _LoginPageState extends State<LoginPage> {
         var data = snap.value;
         for (int i = 0; i < data.length; i++) {
 
-          if(data['uname']==emailController.text){
-
-          this.currUser = new User(
+          if(data[i]['uname']==emailController.text){
+          this.currUser = User(
             data[i]['uid'],
             data[i]['uname'],
             data[i]['upvCourses'],
@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
           );
 
           break;
-      }
+          }
           else{
             continue;
           }}});
